@@ -1,4 +1,5 @@
 {% load static %}
+{% load image_tags %}
 <header class="main-header-three">
 
 
@@ -18,7 +19,7 @@
                     </ul>
                 </div>
                 <div class="main-menu-three__logo">
-                    <a href="{% url 'index' %}"><img src="{% static 'assets/images/resources/ingrids_logo.png' %}" alt="Logo"></a>
+                    <a href="{% url 'index' %}"><img src="{% webp_image 'assets/images/resources/ingrids_logo.png' %}" alt="Logo"></a>
                 </div>
                 <div class="main-menu-three__right">
                     <div class="main-menu-three__search-side-content-login-box">

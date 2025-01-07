@@ -1,5 +1,6 @@
 {% extends 'myApp/base.html' %}
 {% load static %}
+{% load image_tags %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -247,7 +248,7 @@
             <!-- Image Section -->
             <div class="col-lg-6">
                 <div class="coaching-image">
-                    <img src="{% static 'assets/images/ingrid/sittingwithlaptop.webp' %}" alt="Coaching for Next Level" class="img-fluid" loading="lazy">
+                    <img src="{% webp_image 'assets/images/ingrid/sittingwithlaptop.webp' %}" alt="Coaching for Next Level" class="img-fluid" loading="lazy">
                 </div>
             </div>
             <!-- Text Section -->
@@ -270,7 +271,7 @@
         <!-- Service 1 -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-6">
-                <img src="{% static 'assets/images/ingrid/guidance.png' %}" alt="Powerful Guidance Plan" class="img-fluid rounded">
+                <img src="{% webp_image 'assets/images/ingrid/guidance.png' %}" alt="Powerful Guidance Plan" class="img-fluid rounded">
             </div>
             <div class="col-lg-6">
                 <h2>1:1 Powerful Guidance Plan</h2>
@@ -283,7 +284,7 @@
         <!-- Service 2 -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-6 order-lg-2">
-                <img src="{% static 'assets/images/ingrid/backpack.png' %}" alt="Lightening Your Emotional Backpack" class="img-fluid rounded">
+                <img src="{% webp_image 'assets/images/ingrid/backpack.png' %}" alt="Lightening Your Emotional Backpack" class="img-fluid rounded">
             </div>
             <div class="col-lg-6 order-lg-1">
                 <h2>1:1 Lightening Your Emotional Backpack</h2>
@@ -302,7 +303,7 @@
             <!-- Image Section -->
             <div class="col-lg-6">
                 <div class="image-box">
-                    <img src="{% static 'assets/images/ingrid/coffeesession20.webp' %}" alt="Coffee Session" class="img-fluid rounded">
+                    <img src="{% webp_image 'assets/images/ingrid/coffeesession20.webp' %}" alt="Coffee Session" class="img-fluid rounded">
                 </div>
             </div>
             <!-- Text Section -->
@@ -366,7 +367,7 @@
             <!-- Image Section -->
             <div class="col-lg-6">
                 <div class="guidance-image">
-                    <img src="{% static 'assets/images/ingrid/guidanceplan.webp' %}" alt="Guidance Plan" class="img-fluid rounded">
+                    <img src="{% webp_image 'assets/images/ingrid/guidanceplan.webp' %}" alt="Guidance Plan" class="img-fluid rounded">
                 </div>
             </div>
         </div>

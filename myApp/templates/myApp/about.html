@@ -1,9 +1,11 @@
 {% extends 'myApp/base.html' %}
 {% load static %}
+{% load image_tags %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
 {% load static %}
+{% load image_tags %}
 <section class="about-two">
     <div class="container">
         <div class="row">
@@ -11,10 +13,10 @@
                 <div class="about-two__left">
                     <div class="about-two__img-box wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                         <div class="about-two__img">
-                            <img src="{% static 'assets/images/ingrid/blackpants380x520.png' %}" alt="Ingrid Cruysberghs">
+                            <img src="{% webp_image 'assets/images/ingrid/blackpants380x520.png' %}" alt="Ingrid Cruysberghs">
                         </div>
                         <div class="about-two__img-two">
-                            <img src="{% static 'assets/images/ingrid/stone420x204.png' %}" alt="Ingrid Cruysberghs">
+                            <img src="{% webp_image 'assets/images/ingrid/stone420x204.png' %}" alt="Ingrid Cruysberghs">
                         </div>
                         <div class="about-two__tretments">
                             <div class="about-two__tretments-icon">
@@ -110,10 +112,10 @@
                 <div class="skill-one__right">
                     <div class="skill-one__img-box">
                         <div class="skill-one__img">
-                            <img src="{% static 'assets/images/ingrid/notebook.jpg' %}" alt="">
+                            <img src="{% webp_image 'assets/images/ingrid/notebook.jpg' %}" alt="">
                         </div>
                         <div class="skill-one__img-2">
-                            <img src="{% static 'assets/images/ingrid/400x500.png' %}" alt="">
+                            <img src="{% webp_image 'assets/images/ingrid/400x500.png' %}" alt="">
                         </div>
                         <div class="skill-one__trusted">
                             <div class="skill-one__trusted-shape-1"></div>
@@ -185,7 +187,7 @@
                                         </div>
                                         <div class="item">
                                             <div class="testimonial-two__single">
-                                                <img src="{% static 'assets/images/ingrid/aboutme/1.png' %}" alt="Client Image" class="testimonial-two__client-img">
+                                                <img src="{% webp_image 'assets/images/ingrid/aboutme/1.png' %}" alt="Client Image" class="testimonial-two__client-img">
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +202,7 @@
                                         </div>
                                         <div class="item">
                                             <div class="testimonial-two__single">
-                                                <img src="{% static 'assets/images/ingrid/aboutme/2.png' %}" alt="Client Image" class="testimonial-two__client-img">
+                                                <img src="{% webp_image 'assets/images/ingrid/aboutme/2.png' %}" alt="Client Image" class="testimonial-two__client-img">
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +217,7 @@
                                         </div>
                                         <div class="item">
                                             <div class="testimonial-two__single">
-                                                <img src="{% static 'assets/images/ingrid/aboutme/3.png' %}" alt="Client Image" class="testimonial-two__client-img">
+                                                <img src="{% webp_image 'assets/images/ingrid/aboutme/3.png' %}" alt="Client Image" class="testimonial-two__client-img">
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +232,7 @@
                     <div class="col-xl-7 col-lg-6">
                         <div class="testimonial-two__bottom-right">
                             <div class="testimonial-two__bottom-img">
-                                <img src="{% static 'assets/images/ingrid/670x520.png' %}" alt="Static Image">
+                                <img src="{% webp_image 'assets/images/ingrid/670x520.png' %}" alt="Static Image">
                             </div>
                         </div>
                     </div>
@@ -262,7 +264,7 @@
                         </div>
                         <div class="about-two__user-box">
                             <div class="about-two__user-img">
-                                <img src="{% static 'assets/images/resources/about-two-user-img.jpg' %}" alt="">
+                                <img src="{% webp_image 'assets/images/resources/about-two-user-img.jpg' %}" alt="">
                             </div>
                             <div class="about-two__user-content">
                                 <h4 class="about-two__user-name">Jasonia Tim</h4>

@@ -15,7 +15,13 @@ SECRET_KEY = "django-insecure-%d(p#$c8r6*%obsfx@41n$!$q8-)izb3fj5l39-w9l9l41*#nh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://0.0.0.0:8080','127.0.0.1', 'localhost', 'https://ingridwebsite-production-001.up.railway.app/', 'ingridwebsite-production-001.up.railway.app']
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    '127.0.0.1',
+    'localhost',
+    'ingridwebsite-production-001.up.railway.app'
+]
+
 
 
 
@@ -50,7 +56,7 @@ ROOT_URLCONF = "myProject.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],  # Add this line
+        "DIRS": [os.path.join(BASE_DIR, "myApp", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -113,9 +119,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'myApp', 'static')]
+
 
 
 MEDIA_URL = '/media/'

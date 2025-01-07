@@ -1,4 +1,5 @@
 {% load static %}
+{% load image_tags %}
 <div class="xs-sidebar-group info-group info-sidebar">
     <div class="xs-overlay xs-bg-black"></div>
     <div class="xs-sidebar-widget">
@@ -10,7 +11,7 @@
                 <div class="sidebar-info-contents">
                     <div class="content-inner">
                         <div class="logo">
-                            <a href="{% url 'index' %}"><img src="{% static 'assets/images/resources/logo-1.png' %}" alt="Logo"></a>
+                            <a href="{% url 'index' %}"><img src="{% webp_image 'assets/images/resources/logo-1.png' %}" alt="Logo"></a>
                         </div>
                         <div class="content-box">
                             <h4>About Us</h4>
