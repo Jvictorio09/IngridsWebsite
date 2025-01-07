@@ -1,36 +1,70 @@
 {% load static %}
 {% load image_tags %}
+
 <header class="main-header-three">
-
-
     <nav class="main-menu main-menu-three">
         <div class="main-menu-three__wrapper">
             <div class="main-menu-three__wrapper-inner">
+
+                <!-- Logo Section -->
+                <div class="main-menu-three__logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'assets/images/resources/ingrids_logo.png' %}" alt="Logo">
+                    </a>
+                </div>
+
+                <!-- Main Menu -->
                 <div class="main-menu-three__main-menu-box">
+                    <!-- Mobile Navigation Toggle -->
                     <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                     <ul class="main-menu__list">
-                        <li><a href="{% url 'index' %}">Home <span class="main-menu-border"></span></a></li>
-                        <li><a href="{% url 'about' %}">About <span class="main-menu-border"></span></a></li>
-                        <li><a href="{% url 'readings' %}">Readings <span class="main-menu-border"></span></a></li>
-                        <li><a href="{% url 'booking' %}">Bookings <span class="main-menu-border"></span></a></li>
-                        <li><a href="{% url 'business' %}">Business <span class="main-menu-border"></span></a></li>
-                        <li><a href="{% url 'guidanceplan' %}">Guidance Plan <span class="main-menu-border"></span></a></li>
-                        <li><a href="{% url 'shop' %}">Shop <span class="main-menu-border"></span></a></li>
+                        <li class="{% if request.path == '/' %}active{% endif %}">
+                            <a href="{% url 'index' %}">Home <span class="main-menu-border"></span></a>
+                        </li>
+                        <li class="{% if request.path == '/about/' %}active{% endif %}">
+                            <a href="{% url 'about' %}">About <span class="main-menu-border"></span></a>
+                        </li>
+                        <li class="{% if request.path == '/readings/' %}active{% endif %}">
+                            <a href="{% url 'readings' %}">Readings <span class="main-menu-border"></span></a>
+                        </li>
+                        <li class="{% if request.path == '/booking/' %}active{% endif %}">
+                            <a href="{% url 'booking' %}">Bookings <span class="main-menu-border"></span></a>
+                        </li>
+                        <li class="{% if request.path == '/business/' %}active{% endif %}">
+                            <a href="{% url 'business' %}">Business <span class="main-menu-border"></span></a>
+                        </li>
+                        <li class="{% if request.path == '/guidanceplan/' %}active{% endif %}">
+                            <a href="{% url 'guidanceplan' %}">Guidance Plan <span class="main-menu-border"></span></a>
+                        </li>
+                        <li class="{% if request.path == '/shop/' %}active{% endif %}">
+                            <a href="{% url 'shop' %}">Shop <span class="main-menu-border"></span></a>
+                        </li>
                     </ul>
+                    
+                    
                 </div>
-                <div class="main-menu-three__logo">
-                    <a href="{% url 'index' %}"><img src="{% webp_image 'assets/images/resources/ingrids_logo.png' %}" alt="Logo"></a>
-                </div>
+
+                <!-- Social Media and Contact -->
                 <div class="main-menu-three__right">
                     <div class="main-menu-three__search-side-content-login-box">
                         <div class="main-menu-three__social-icons">
-                            <a href="https://api.whatsapp.com/send?phone=https://wa.me/34951215346" target="_blank" style="color: #BC9E82; font-size: 18px; margin-right: 15px;"><i class="fab fa-whatsapp"></i></a>
-                            <a href="mailto:ingrid@ingridcruysberghs.net" target="_blank" style="color: #BC9E82; font-size: 18px; margin-right: 15px;"><i class="fa fa-envelope"></i></a>
-                            <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank" style="color: #BC9E82; font-size: 18px; margin-right: 15px;"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank" style="color: #BC9E82; font-size: 18px; margin-right: 15px;"><i class="fab fa-facebook"></i></a>
-                            <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank" style="color: #BC9E82; font-size: 18px; margin-right: 15px;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank" title="WhatsApp" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:ingrid@ingridcruysberghs.net" target="_blank" title="Email" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                            <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank" title="Instagram" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank" title="Facebook" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank" title="LinkedIn" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>

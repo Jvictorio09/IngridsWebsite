@@ -6819,6 +6819,7 @@ color: var(--meciy-black);
 .skill-one__img-box {
   position: relative;
   display: block;
+  overflow: hidden;
 }
 
 .skill-one__img {
@@ -6842,9 +6843,10 @@ color: var(--meciy-black);
 
 .skill-one__img-2 {
   position: absolute;
-  left: -211px;
-  bottom: 176px;
+  left: 0; /* Adjust this value as needed */
+  bottom: 176px; /* Keep this if necessary */
 }
+
 
 .skill-one__img-2::before {
   content: "";
