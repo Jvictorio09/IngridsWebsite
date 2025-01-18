@@ -1503,14 +1503,14 @@ color: var(--meciy-black);
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #000000;
+  background-color: rgb(244, 206, 174);
   opacity: 0.5;
   cursor: pointer;
 }
 
 .mobile-nav__content {
   width: 300px;
-  background-color: var(--meciy-black);
+  background-color: rgb(244, 206, 174);
   z-index: 10;
   position: relative;
   height: 100%;
@@ -1591,7 +1591,7 @@ color: var(--meciy-black);
   -ms-flex-pack: justify;
   justify-content: space-between;
   line-height: 30px;
-  color: #ffffff;
+  color: black;
   font-size: 14px;
   font-family: var(--meciy-font);
   font-weight: 500;
@@ -1619,7 +1619,7 @@ color: var(--meciy-black);
   background-color: var(--meciy-primary);
   border: none;
   outline: none;
-  color: #fff;
+  color: black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1736,7 +1736,7 @@ color: var(--meciy-black);
 }
 
 .mobile-nav__contact li a {
-  color: #ffffff;
+  color: black;
   -webkit-transition: 500ms;
   transition: 500ms;
 }

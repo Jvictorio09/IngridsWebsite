@@ -65,53 +65,77 @@
 }
 
 .journey-creative__images {
-    position: relative;
-    z-index: 1;
-    text-align: center;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+    flex-wrap: wrap; /* Responsive grid layout */
+    justify-content: center; /* Centers content horizontally */
+    align-items: flex-start; /* Aligns content neatly */
+    gap: 25px; /* Spacing between images */
+    padding: 20px; /* Adds breathing space around the content */
+    position: relative;
 }
 
 .journey-creative__image {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative; /* For layering effects */
+    overflow: hidden; /* Ensures the content stays inside bounds */
+    border-radius: 15px; /* Modern, smooth corners */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* Creative shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9; /* Light background for fallback */
 }
 
-.journey-creative__image--primary {
-    width: 80%;
-    position: relative;
+/* Staggered sizes for creativity */
+.journey-creative__image--large {
+    width: 60%; /* Larger primary image */
+    max-width: 500px;
+    height: auto;
 }
 
-.journey-creative__image--floating {
-    width: 50%;
+.journey-creative__image--medium {
+    width: 45%; /* Medium-sized images */
+    max-width: 350px;
+    height: auto;
+}
+
+.journey-creative__image--small {
+    width: 30%; /* Small supporting images */
+    max-width: 250px;
+    height: auto;
+}
+
+/* Interactive hover effects */
+.journey-creative__image:hover {
+    transform: translateY(-5px) scale(1.02); /* Subtle lift and zoom */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+.journey-creative__image img {
+    width: 100%; /* Images fill the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes inline spacing */
+    border-radius: 15px; /* Matches the container */
+}
+
+/* Decorative background element */
+.journey-creative__decor {
     position: absolute;
-    top: 30%;
-    left: 10%;
-    transform: rotate(-5deg);
-    opacity: 0.9;
-}
-
-.journey-creative__circle {
-    position: absolute;
-    top: 20%;
-    right: -20%;
-    width: 200px;
-    height: 200px;
-    background-color: rgba(255, 235, 219, 0.5);
-    border-radius: 50%;
-}
-
-.journey-creative__line {
-    position: absolute;
-    top: 10%;
-    left: -5%;
     width: 150px;
-    height: 5px;
-    background-color: #a67b5b; /* Soft brown */
+    height: 150px;
+    background-color: rgba(255, 235, 219, 0.7);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float 6s ease-in-out infinite;
 }
+
+/* Subtle floating animation for the decorative element */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
 
 
 </style>
