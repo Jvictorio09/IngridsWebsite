@@ -8031,7 +8031,7 @@ color: var(--meciy-black);
 .feature-four__content {
   position: relative;
   display: block;
-  background-color: var(--meciy-black);
+  background-color: whitesmoke;
   padding: 88px 30px 33px;
   z-index: 1;
 }
