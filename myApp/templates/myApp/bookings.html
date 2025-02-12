@@ -67,6 +67,52 @@
     display: inline-block;
     margin-top: 10px;
 }
+/* Position the coffee cup near CTA */
+.virtual-coffee-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Floating Coffee Cup */
+.coffee-cup-container {
+    position: relative;
+    width: 40px;
+    height: auto;
+    animation: floatCoffee 3s ease-in-out infinite; /* Smooth floating effect */
+}
+
+.coffee-cup {
+    width: 100%;
+    display: block;
+}
+
+/* Steam Effect */
+.steam {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 10px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: steamRise 2s ease-in-out infinite;
+}
+
+/* Keyframe Animations */
+@keyframes floatCoffee {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes steamRise {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-30px); opacity: 0; }
+}
+
 
 </style>
 
@@ -279,6 +325,17 @@
             <div class="col-lg-12 text-center mb-4">
                 <img <img src="{% webp_image 'assets/images/ingrid/virtualcoffee.webp' %}" alt="Virtual Coffee Session" class="img-fluid virtual-coffee__image">
             </div>
+            <div class="virtual-coffee-cta">
+                <a href="#" class="virtual-coffee__link">Yes, please →</a>
+                <div class="coffee-cup-container">
+                    <img src="{% webp_image 'assets/images/ingrid/coffee-cup.webp' %}" 
+                         alt="Coffee Cup" 
+                         class="coffee-cup">
+                    <div class="steam"></div> <!-- Steam Effect -->
+                </div>
+            </div>
+            
+            
             
             <!-- Columns -->
             <div class="col-lg-4">
