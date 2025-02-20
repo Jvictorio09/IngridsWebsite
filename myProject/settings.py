@@ -20,6 +20,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'ingridwebsite-production-001.up.railway.app'
+    'ingridcruysberghs.com'
 ]
 
 

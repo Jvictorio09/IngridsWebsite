@@ -67,50 +67,82 @@
     display: inline-block;
     margin-top: 10px;
 }
-/* Position the coffee cup near CTA */
+
+/* Positioning the Virtual Coffee CTA */
 .virtual-coffee-cta {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
     justify-content: center;
+    text-align: center;
+    margin-top: 20px;
 }
 
-/* Floating Coffee Cup */
+/* Coffee Cup Floating & Hover Tilt */
 .coffee-cup-container {
     position: relative;
-    width: 40px;
+    width: 100px; /* Adjust size */
     height: auto;
-    animation: floatCoffee 3s ease-in-out infinite; /* Smooth floating effect */
+    margin: 0 auto;
+    animation: floatCoffee 3s ease-in-out infinite;
+    transition: transform 0.3s ease-in-out;
 }
 
+/* Make the entire coffee section clickable */
+.clickable-coffee {
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Keeps it in place */
+}
+
+/* Add a hover effect */
+.clickable-coffee:hover .coffee-cup-container {
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+
+
+/* Hover effect: Tilts slightly when hovered */
+.coffee-cup-container:hover {
+    transform: rotate(-2deg) scale(1.05);
+}
+
+/* Coffee Cup Image */
 .coffee-cup {
     width: 100%;
     display: block;
 }
 
-/* Steam Effect */
-.steam {
+/* Steam Text Animation */
+.steam-text-container {
     position: absolute;
-    top: -10px;
+    top: -30px; /* Adjust position above the cup */
     left: 50%;
-    width: 10px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: steamRise 2s ease-in-out infinite;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #a67b5b; /* Coffee-inspired color */
+    opacity: 0;
+    animation: steamWavy 4s ease-in-out infinite;
 }
 
-/* Keyframe Animations */
+/* Hover effect: Increases opacity */
+.coffee-cup-container:hover .steam-text-container {
+    opacity: 1;
+}
+
+/* Floating Coffee Effect */
 @keyframes floatCoffee {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
 }
 
-@keyframes steamRise {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-30px); opacity: 0; }
+/* Steam Writing Effect */
+@keyframes steamWavy {
+    0% { opacity: 0; transform: translateY(10px); }
+    30% { opacity: 0.4; transform: translateY(-5px); }
+    60% { opacity: 0.8; transform: translateY(-8px); }
+    100% { opacity: 0; transform: translateY(-15px); }
 }
 
 
@@ -325,17 +357,6 @@
             <div class="col-lg-12 text-center mb-4">
                 <img <img src="{% webp_image 'assets/images/ingrid/virtualcoffee.webp' %}" alt="Virtual Coffee Session" class="img-fluid virtual-coffee__image">
             </div>
-            <div class="virtual-coffee-cta">
-                <a href="#" class="virtual-coffee__link">Yes, please →</a>
-                <div class="coffee-cup-container">
-                    <img src="{% webp_image 'assets/images/ingrid/coffee-cup.webp' %}" 
-                         alt="Coffee Cup" 
-                         class="coffee-cup">
-                    <div class="steam"></div> <!-- Steam Effect -->
-                </div>
-            </div>
-            
-            
             
             <!-- Columns -->
             <div class="col-lg-4">
@@ -363,8 +384,20 @@
                     <h3 class="virtual-coffee__subtitle">This session is completely free</h3>
                     <p class="virtual-coffee__text">
                         Simply pick a time that suits you using the calendar below.
-                    </p>
-                    <a href="#" class="virtual-coffee__link">Yes, please →</a>
+
+                        <div class="virtual-coffee-cta" style="padding-top: 55px;">
+                            <a href="YOUR_BOOKING_LINK_HERE" class="clickable-coffee" target="_blank">
+                                <div class="coffee-cup-container">
+                                    <div class="steam-text-container">
+                                        <span class="steam-text">Yes, Please</span>
+                                    </div>
+                                    <img src="{% static 'assets/images/ingrid/coffeecup.png' %}" 
+                                         alt="Virtual Coffee Cup" 
+                                         class="coffee-cup"> 
+                                </div>
+                            </a>
+                        </div>
+                                          
                 </div>
             </div>
         </div>
@@ -400,7 +433,7 @@
                                 </div>
                                 <div class="accrodion-content">
                                     <div class="inner">
-                                        <p>Once you’ve scheduled your appointment, I will send you the payment details. You can pay via bank transfer, PayPal, or Bizum — whichever method is most convenient for you.</p>
+                                        <p>Once you’ve scheduled your appointment, I will send you the payment details. You can pay via bank transfer, PayPal, or Bizum — whichever method is most convenient for you..</p>
                                     </div>
                                 </div>
                             </div>
