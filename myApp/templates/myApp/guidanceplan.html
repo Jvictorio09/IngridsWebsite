@@ -240,6 +240,109 @@
 .btn-primary:hover {
     background-color: #d1b896;
 }
+
+/* Main section styling */
+.coffee-chat-section {
+    background-color: #f8f9fa;
+    padding: 70px 20px;
+    text-align: center;
+}
+
+/* Container */
+.coffee-chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* Header */
+.coffee-chat-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.coffee-chat-header p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Content sections */
+.coffee-chat-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.coffee-chat-box {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+    background: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.coffee-chat-box h3 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+/* List Styling */
+.coffee-chat-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.coffee-chat-box ul li {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+
+/* Button */
+.coffee-chat-btn {
+    margin-top: 30px;
+}
+
+.coffee-chat-button {
+    display: inline-block;
+    background: #d1b896;
+    color: #fff;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.coffee-chat-button:hover {
+    background: #bda787;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .coffee-chat-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .coffee-chat-box {
+        text-align: center;
+    }
+}
+
     </style>
     
 <section class="coaching-section">
@@ -374,37 +477,41 @@
     </div>
 </section>
 
-<section class="virtual-coffee-section">
-    <div class="container">
-        <div class="text-center">
-            <h2>Interested in Working Together?<br>Let’s Chat Over a Virtual Coffee!</h2>
+<section class="coffee-chat-section">
+    <div class="coffee-chat-container">
+        <div class="coffee-chat-header text-center">
+            <h2>Let’s Chat Over a Virtual Coffee! ☕</h2>
             <p>
-                If you’re curious about my coaching programs and want to see if we’re a good match, I invite you to a 
-                free 20-minute virtual coffee session. This is a no-pressure opportunity for us to connect, discuss your goals, 
-                and explore which coaching plan—<em>1:1 Guidance Plan</em> or <em>Lightening Your Emotional Backpack</em>—best suits your needs.
+                Curious about my coaching programs? Join me for a <strong>free 20-minute virtual coffee session</strong>. 
+                This is a casual, no-pressure opportunity for us to connect, discuss your goals, 
+                and explore whether the <em>1:1 Guidance Plan</em> or <em>Lightening Your Emotional Backpack</em> 
+                coaching program is the best fit for you.
             </p>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
+
+        <div class="coffee-chat-content">
+            <div class="coffee-chat-box">
                 <h3>What to Expect:</h3>
                 <ul>
-                    <li>A friendly, casual chat to discuss where you are in life and what you’re looking to achieve.</li>
-                    <li>An opportunity to ask any questions you might have about the coaching process.</li>
-                    <li>Clarity on how my coaching can support your journey and which plan is right for you.</li>
+                    <li>☕ A relaxed, friendly conversation about your goals.</li>
+                    <li>❓ A chance to ask any questions about the coaching process.</li>
+                    <li>🌟 Guidance on which coaching plan aligns with your journey.</li>
                 </ul>
             </div>
-            <div class="col-lg-12">
+            <div class="coffee-chat-box">
                 <h3>How It Works:</h3>
                 <ul>
-                    <li>The session takes place over <strong>WhatsApp, Skype, Zoom, or Google Meet</strong>, whichever platform is easiest for you.</li>
-                    <li>Simply click the button below to book your free session.</li>
+                    <li>📞 Connect via <strong>WhatsApp, Skype, Zoom, or Google Meet</strong>—your choice.</li>
+                    <li>📅 Click the button below to book your free session.</li>
                 </ul>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <a href="#" class="btn btn-primary">Book Your Free 20-Minute Session</a>
+
+        <div class="coffee-chat-btn text-center">
+            <a href="#" class="coffee-chat-button">Book Your Free 20-Minute Session</a>
         </div>
     </div>
 </section>
+
 {% include 'myApp/sidebar_widget.html' %}
 {% endblock %}
