@@ -78,12 +78,41 @@ WSGI_APPLICATION = "myProject.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+import os
+import environ
+import dj_database_url
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Initialize environ and load .env if it exists (for local development)
+env = environ.Env()
+env_path = os.path.join(BASE_DIR, '.env')
+if os.path.exists(env_path):
+    environ.Env.read_env(env_path)
+else:
+    # In production (e.g., on Railway) the environment variables are already set
+    print("No .env file found. Using system environment variables.")
+
+# Choose your database backend based on the USE_SQLITE flag
+USE_SQLITE = env.bool('USE_SQLITE', default=False)
+if USE_SQLITE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    # This expects a DATABASE_URL variable to be set in your environment
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=env('DATABASE_URL'),
+            conn_max_age=600,
+            ssl_require=True  # Enable if your Railway DB requires SSL
+        )
+    }
+
 
 
 # Password validation
@@ -135,30 +164,29 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 import os
 import environ
 
 # Get the base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
- 
 env = environ.Env()
 env_file = os.path.join(BASE_DIR, '.env')
 
+# If a .env file exists, load it. Otherwise, if you're not on Railway, raise an error.
 if os.path.exists(env_file):
     env.read_env(env_file)
-else:
+elif not os.environ.get('RAILWAY'):
     raise Exception("⚠️ .env file not found in the project root!")
+else:
+    print("Running on Railway: using system environment variables.")
 
- 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')  # This was missing!
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # App password
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
-
- 
