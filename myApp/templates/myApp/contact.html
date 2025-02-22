@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Connect with Me - Ingrid Cruysberghs{% endblock %}</title>
+    <link rel="icon" href="{% static 'assets/img/2.png' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{% static 'css/social-links-style.css' %}">
+</head>
+
+<style>
+/* 🌿 General Styles - Nude & Elegant Theme */
+body {
+    background-color: #F5EFE7;
+    font-family: 'Poppins', sans-serif;
+    color: #4A3F35;
+}
+
+/* 📌 Social Links Section */
+ /* 🌿 Social Links Container */
+.social-links-container {
+    background: #FAF6F2;
+    padding: 60px;
+    border-radius: 18px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 550px;
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ✅ Centers content horizontally */
+    justify-content: center; /* ✅ Centers content vertically */
+}
+
+/* 🎯 Social Media Buttons */
+.social-links-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* ✅ Makes sure all buttons are uniform */
+    max-width: 350px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    color: #3A322A;
+    background: linear-gradient(145deg, #EDE3D9, #DCCFC3);
+    border: 1px solid #C9B8A8;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.05), -3px -3px 8px rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/* 🛎 Ensure Full Centering */
+.social-links-container > .d-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ✅ Ensures buttons align to the center */
+    justify-content: center;
+}
+
+/* 📱 Mobile Fixes */
+@media (max-width: 768px) {
+    .social-links-button {
+        font-size: 16px;
+        padding: 12px;
+        width: 90%;
+    }
+}
+
+
+/* 🏆 Heading */
+.social-links-heading {
+    font-size: 30px;
+    font-weight: 600;
+    color: #3A322A;
+    margin-bottom: 12px;
+}
+
+/* ✨ Tagline */
+.social-links-tagline {
+    font-size: 17px;
+    font-weight: 400;
+    color: #6D5F51;
+    margin-bottom: 25px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 🎯 Social Media Button Styling */
+.social-links-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    max-width: 350px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    color: #3A322A;
+    background: linear-gradient(145deg, #EDE3D9, #DCCFC3);
+    border: 1px solid #C9B8A8;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.05), -3px -3px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* 🛎 Hover Effects */
+.social-links-button:hover {
+    background: linear-gradient(145deg, #DFD4C8, #C8B8A6);
+    border-color: #BFAE9D;
+    transform: translateY(-2px);
+    transition: 0.3s;
+}
+
+/* 🎨 Icon Styling */
+.social-links-button i {
+    font-size: 22px;
+    margin-right: 10px;
+    color: #7A6A5B;
+}
+
+/* Unique Button Colors (Nude & Minimal) */
+.social-links-whatsapp { background: linear-gradient(145deg, #EDE8E2, #D6CEC5); }
+.social-links-email { background: linear-gradient(145deg, #F0E9E2, #D9CFC7); }
+.social-links-instagram { background: linear-gradient(145deg, #F2E6DB, #DBCEC3); }
+.social-links-facebook { background: linear-gradient(145deg, #EFE4D9, #D8CBC0); }
+.social-links-linkedin { background: linear-gradient(145deg, #EADFD3, #D4C9BD); }
+
+/* Hover Effects */
+.social-links-whatsapp:hover { background: linear-gradient(145deg, #E0DAD2, #C9BFB6); }
+.social-links-email:hover { background: linear-gradient(145deg, #DFD7CF, #C7BFB6); }
+.social-links-instagram:hover { background: linear-gradient(145deg, #E5D9CE, #CFC4B8); }
+.social-links-facebook:hover { background: linear-gradient(145deg, #E2D6CA, #C8BEB2); }
+.social-links-linkedin:hover { background: linear-gradient(145deg, #DED2C5, #C7BCB0); }
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 768px) {
+    .social-links-button {
+        font-size: 16px;
+        padding: 12px;
+        width: 100%;
+    }
+}
+</style>
+
+<body>
+
+    <div class="social-links-container">
+        <h1 class="social-links-heading">Let's Connect on Social Media!</h1>
+
+        <!-- Tagline Section -->
+        <p class="social-links-tagline">
+            Stay connected and updated with me on these platforms.
+        </p>
+
+        <div class="d-flex flex-column align-items-center">
+            <!-- WhatsApp -->
+            <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank" class="social-links-button social-links-whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:ingrid@ingridcruysberghs.com" target="_blank" class="social-links-button social-links-email">
+                <i class="fa fa-envelope"></i> Email Me
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank" class="social-links-button social-links-instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank" class="social-links-button social-links-facebook">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank" class="social-links-button social-links-linkedin">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

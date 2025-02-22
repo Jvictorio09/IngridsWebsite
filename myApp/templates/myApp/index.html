@@ -276,6 +276,7 @@
 
 
 </style>
+<!-- Signup Modal -->
 <div id="welcomeModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
@@ -287,10 +288,11 @@
                 <h3>Starting Your Story - How to Begin Writing in Your Notebook</h3>
                 <p>Take the first step toward your creative goals today!</p>
                 <form id="emailSignupForm">
-                    <input type="text" name="name" placeholder="Name" required>
-                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <input type="email" name="email" id="email" placeholder="Email Address" required>
                     <button type="submit">Get the Free Guide</button>
                 </form>
+                <p id="successMessage" style="color: green; display: none;">✅ Check your email for the free guide!</p>
             </div>
             <!-- Image Section -->
             <div class="modal-image">
@@ -299,10 +301,10 @@
                     alt="Popup Image" 
                     style="max-width: 100%; max-height: 80vh; object-fit: contain;">
             </div>
-            
         </div>
     </div>
 </div>
+
 
   
   
@@ -357,7 +359,7 @@
                     <div class="feature-four__content">
                          
                         <h3 class="feature-four__title">
-                            <a href="#">Readings</a>
+                            <a href="{% url 'readings' %}">Readings</a>
                         </h3>
                         <p class="feature-four__text">
                             Gain insights and clarity with spiritual and intuitive readings.
@@ -377,7 +379,7 @@
                     <div class="feature-four__content">
                        
                         <h3 class="feature-four__title">
-                            <a href="#">Coaching</a>
+                            <a href="{% url 'guidanceplan' %}">Coaching</a>
                         </h3>
                         <p class="feature-four__text">
                             Tailored coaching to unlock potential and achieve goals.
@@ -397,7 +399,7 @@
                     <div class="feature-four__content">
                         
                         <h3 class="feature-four__title">
-                            <a href="#">Bookings</a>
+                            <a href="{% url 'booking' %}">Bookings</a>
                         </h3>
                         <p class="feature-four__text">
                             Convenient booking options for your personalized needs.
@@ -474,7 +476,7 @@
                         <div class="services-three__icon">
                             <span class="icon-conversation"></span>
                         </div>
-                        <h3 class="services-three__title"><a href="personal-reading.html">Personal Reading</a></h3>
+                        <h3 class="services-three__title"><a href="{% url 'readings' %}">Personal Reading</a></h3>
                         <p class="services-three__text">Gain clarity on life’s challenges through tailored clairvoyant readings addressing your unique needs.</p>
                     </div>
                 </div>
@@ -498,7 +500,7 @@
                         <div class="services-three__icon">
                             <span class="icon-happy"></span>
                         </div>
-                        <h3 class="services-three__title"><a href="business-sessions.html">Business Sessions</a></h3>
+                        <h3 class="services-three__title"><a href="{% url 'business' %}">Business Sessions</a></h3>
                         <p class="services-three__text">Intuitive guidance to help you navigate key business decisions and uncover new opportunities.</p>
                     </div>
                 </div>
@@ -532,7 +534,7 @@
                         <div class="services-three__icon">
                             <span class="icon-healthcare"></span>
                         </div>
-                        <h3 class="services-three__title"><a href="life-coaching.html">Life Coaching</a></h3>
+                        <h3 class="services-three__title"><a href="{% url 'guidanceplan' %}">Life Coaching</a></h3>
                         <p class="services-three__text">Empowering sessions offering strategies to help you navigate life transitions with clarity and confidence.</p>
                     </div>
                 </div>
@@ -556,7 +558,7 @@
                         <div class="services-three__icon">
                             <span class="icon-mental-health-1"></span>
                         </div>
-                        <h3 class="services-three__title"><a href="digital-resources.html">Digital Resources</a></h3>
+                        <h3 class="services-three__title"><a href="{% url 'shop' %}">Digital Resources</a></h3>
                         <p class="services-three__text">Explore digital workbooks designed to support personal growth and lasting transformation.</p>
                     </div>
                 </div>
@@ -584,9 +586,9 @@
                         </div>
                         <div class="team-details__social">
                             
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/ingrid.cruysberghswouters/"><i class="fab fa-facebook"></i></a>
                              
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/ingridcruysberghs/"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -599,7 +601,7 @@
                         <p class="team-details__text">I am passionate about guiding individuals on their spiritual journeys and helping them uncover the hidden depths within themselves. My goal is to empower people to align with their true purpose, break free from limiting beliefs, and live a life filled with clarity, confidence, and connection to their higher selves.</p>
                         <p class="team-details__text">If that resonates with you — then I’m truly glad you’re here.</p>
                         <div class="team-details__btn">
-                            <a href="contact.html">contact me</a>
+                            <a href="{% url 'contact' %}">contact me</a>
                         </div>
                     </div>
                 </div>
@@ -644,39 +646,65 @@
             </p>
         </div>
         <div class="team-details__btn">
-            <a href="contact.html">Let's Start Your Transformation</a>
+            <a href="{% url 'contact' %}">Let's Start Your Transformation</a>
         </div>
     </div>
 </section>
 <script>
-window.onload = function () {
-  const modal = document.getElementById('welcomeModal');
-  const closeBtn = document.querySelector('.close');
+ 
+document.addEventListener("DOMContentLoaded", function () {
+    // Show the modal when the page loads
+    setTimeout(() => {
+        document.getElementById("welcomeModal").style.display = "flex";
+    }, 2000);
 
-  // Show the modal when the page loads
-  setTimeout(() => {
-    modal.style.display = 'block';
-  }, 1000); // Delay the modal by 1 second
-
-  // Close the modal when the close button is clicked
-  window.closeModal = function () {
-    modal.style.display = 'none';
-  };
-
-  // Close the modal if clicked outside the modal content
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
+    // Close the modal
+    function closeModal() {
+        document.getElementById("welcomeModal").style.display = "none";
     }
-  };
 
-  // Optional: Handle form submission
-  document.getElementById('emailSignupForm').onsubmit = function (event) {
-    event.preventDefault();
-    alert('Thank you for signing up!');
-    modal.style.display = 'none';
-  };
-};
+    // Attach close event
+    document.querySelector(".close").addEventListener("click", closeModal);
+
+    // Handle form submission via AJAX
+    document.getElementById("emailSignupForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let formData = new FormData(this);
+
+        fetch("{% url 'send_free_guide' %}", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": getCSRFToken(),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("successMessage").style.display = "block";
+                closeModal();
+            } else {
+                alert("❌ Something went wrong! Try again.");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+
+    // Function to get CSRF Token
+    function getCSRFToken() {
+        let cookieValue = null;
+        let cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.startsWith("csrftoken=")) {
+                cookieValue = cookie.substring("csrftoken=".length);
+                break;
+            }
+        }
+        return cookieValue;
+    }
+});
 
 
 </script>
