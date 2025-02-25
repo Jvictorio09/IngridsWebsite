@@ -74,30 +74,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "myProject.wsgi.application"
 
-import environ
 import os
+import environ
 import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Initialize environ
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+env_file = os.path.join(BASE_DIR, '.env')
 
-USE_SQLITE = env.bool('USE_SQLITE', default=False)  # Default is False to prioritize PostgreSQL
-if USE_SQLITE:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+if os.path.exists(env_file):
+    env.read_env(env_file)
+elif not os.environ.get('RAILWAY'):
+    raise Exception("⚠️ .env file not found in the project root!")
 else:
-    DATABASES = {
-        'default': dj_database_url.config(default=env('DATABASE_URL'))
-    }
+    print("No .env file found. Using system environment variables.")
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 
 
 # Password validation
