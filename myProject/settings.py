@@ -1,25 +1,20 @@
-import os
-from pathlib import Path
-import environ
 import dj_database_url
+import os
+import environ
+from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Initialize environ
-env = environ.Env(
-    # Set casting, default values
-    DEBUG=(bool, False)
-)
-
-# Load .env file if it exists, else use system environment variables.
+env = environ.Env(DEBUG=(bool, False))
 env_file = os.path.join(BASE_DIR, '.env')
+
 if os.path.exists(env_file):
     env.read_env(env_file)
-elif not os.environ.get('RAILWAY'):
-    raise Exception("⚠️ .env file not found in the project root!")
 else:
-    print("No .env file found. Using system environment variables.")
+    # Check if essential variables are set; if not, raise an error.
+    if not os.environ.get('DATABASE_URL'):
+        raise Exception("⚠️ DATABASE_URL is not set in the environment!")
+    else:
+        print("No .env file found. Using system environment variables.")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # For production, load SECRET_KEY from environment variables.
