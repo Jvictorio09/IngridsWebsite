@@ -74,28 +74,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "myProject.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-import os
 import environ
+import os
 import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Initialize environ and load .env if it exists (for local development)
+# Initialize environ
 env = environ.Env()
-env_path = os.path.join(BASE_DIR, '.env')
-if os.path.exists(env_path):
-    environ.Env.read_env(env_path)
-else:
-    # In production (e.g., on Railway) the environment variables are already set
-    print("No .env file found. Using system environment variables.")
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-# Choose your database backend based on the USE_SQLITE flag
-USE_SQLITE = env.bool('USE_SQLITE', default=False)
+USE_SQLITE = env.bool('USE_SQLITE', default=False)  # Default is False to prioritize PostgreSQL
 if USE_SQLITE:
     DATABASES = {
         'default': {
@@ -104,13 +94,8 @@ if USE_SQLITE:
         }
     }
 else:
-    # This expects a DATABASE_URL variable to be set in your environment
     DATABASES = {
-        'default': dj_database_url.config(
-            default=env('DATABASE_URL'),
-            conn_max_age=600,
-            ssl_require=True  # Enable if your Railway DB requires SSL
-        )
+        'default': dj_database_url.config(default=env('DATABASE_URL'))
     }
 
 
