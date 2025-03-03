@@ -20,9 +20,6 @@ def guidanceplan(request):
     return render(request, 'myApp/guidanceplan.html')
 
 
-def shop(request):
-    return render(request, 'myApp/shop.html')
-
 def contact(request):
     return render(request, 'myApp/contact.html')
 
@@ -78,3 +75,91 @@ def send_free_guide(request):
             return JsonResponse({"success": False, "error": str(e)})
     
     return JsonResponse({"success": False, "error": "Invalid request method"})
+
+
+from django.shortcuts import render
+from .models import Product
+
+def shop(request):
+    products = Product.objects.all()
+    return render(request, 'myApp/shop.html', {'products': products})
+
+from django.shortcuts import render
+from .models import Product
+
+def testshop(request):
+    products = Product.objects.all()
+    return render(request, 'myApp/testshop.html', {'products': products})
+
+from django.shortcuts import render, get_object_or_404
+from .models import Product
+
+def product_detail_view(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'myApp/product_detail.html', {'product': product})
+
+
+import json
+import requests
+import os
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Product
+
+# Fetch PayPal credentials securely
+PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID")
+PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET")
+PAYPAL_API_BASE = os.getenv("PAYPAL_API_BASE")
+
+def get_paypal_access_token():
+    """Fetches PayPal API Access Token securely."""
+    response = requests.post(
+        f"{PAYPAL_API_BASE}/v1/oauth2/token",
+        auth=(PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET),
+        data={"grant_type": "client_credentials"},
+    )
+    return response.json()["access_token"]
+
+@csrf_exempt
+def create_paypal_order(request, product_id):
+    """Creates a PayPal order."""
+    product = Product.objects.get(id=product_id)
+    access_token = get_paypal_access_token()
+
+    order_data = {
+        "intent": "CAPTURE",
+        "purchase_units": [{
+            "amount": {
+                "currency_code": "USD",
+                "value": str(product.get_price())
+            }
+        }]
+    }
+
+    response = requests.post(
+        f"{PAYPAL_API_BASE}/v2/checkout/orders",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}"
+        },
+        json=order_data,
+    )
+
+    return JsonResponse(response.json())
+
+@csrf_exempt
+def capture_paypal_order(request):
+    """Captures PayPal order after approval."""
+    data = json.loads(request.body)
+    order_id = data.get("orderID")
+    access_token = get_paypal_access_token()
+
+    response = requests.post(
+        f"{PAYPAL_API_BASE}/v2/checkout/orders/{order_id}/capture",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {access_token}"
+        },
+    )
+
+    return JsonResponse(response.json())

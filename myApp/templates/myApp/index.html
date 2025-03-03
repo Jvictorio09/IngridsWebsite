@@ -5,7 +5,8 @@
 
 {% block content %}
 <style>/* General Modal Styling */
-    .modal {
+        /* Modal Styling - Mobile Optimized */
+        .modal {
       display: none;
       position: fixed;
       z-index: 1000;
@@ -143,32 +144,37 @@
       color: #000;
     }
     
-    /* Responsive Styling */
     @media (max-width: 768px) {
-      .modal-content {
-        max-width: 90%;
-      }
-    
-      .modal-inner {
-        flex-direction: column;
-      }
-    
-      .modal-image {
-        padding: 10px;
-      }
-    
-      .modal-text h2 {
-        font-size: 1.3rem;
-      }
-    
-      .modal-text h3 {
-        font-size: 1.1rem;
-      }
-    
-      form button {
-        font-size: 0.9rem;
-      }
+    .modal {
+        align-items: flex-end;
     }
+
+    .modal-content {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 20px 20px 0 0;
+        animation: slideUp 0.3s ease-in-out;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .modal-image {
+        display: none;
+    }
+
+    .modal-text {
+        padding: 15px;
+        text-align: center;
+    }
+}
+
     
     /* General Styles */
 .intro-section {
@@ -651,12 +657,11 @@
     </div>
 </section>
 <script>
- 
-document.addEventListener("DOMContentLoaded", function () {
-    // Show the modal when the page loads
+ document.addEventListener("DOMContentLoaded", function () {
+    // Show the modal after 2 minutes (120000 ms)
     setTimeout(() => {
         document.getElementById("welcomeModal").style.display = "flex";
-    }, 2000);
+    }, 120000);
 
     // Close the modal
     function closeModal() {
@@ -705,6 +710,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return cookieValue;
     }
 });
+
 
 
 </script>

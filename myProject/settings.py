@@ -23,6 +23,7 @@ SECRET_KEY = "django-insecure-%d(p#$c8r6*%obsfx@41n$!$q8-)izb3fj5l39-w9l9l41*#nh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = [
     '0.0.0.0',
     '127.0.0.1',
@@ -126,3 +127,13 @@ EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env
+
+PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID")
+PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET")
+PAYPAL_API_BASE = os.getenv("PAYPAL_API_BASE")

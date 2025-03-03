@@ -1,0 +1,101 @@
+{% extends 'myApp/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<style>
+    .product-container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .product-image {
+        flex: 1 1 400px;
+    }
+    .product-image img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    .product-details {
+        flex: 1 1 500px;
+    }
+    .product-title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .product-price {
+        font-size: 1.5rem;
+        color: #BC9E82;
+        margin: 10px 0;
+    }
+    .product-description {
+        font-size: 1rem;
+        color: #555;
+    }
+    .add-to-cart {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: white;
+        background: #BC9E82;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-top: 20px;
+    }
+    .add-to-cart:hover {
+        background: #a6856e;
+    }
+    .paypal-button-container {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="product-container">
+    <div class="product-image">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    </div>
+    <div class="product-details">
+        <h1 class="product-title">{{ product.name }}</h1>
+        <p class="product-price">${{ product.get_price }}</p>
+        <p class="product-description">{{ product.description }}</p>
+        <div id="paypal-button-container" class="paypal-button-container"></div>
+    </div>
+</div>
+
+<!-- PayPal SDK (LIVE MODE) -->
+<script src="https://www.paypal.com/sdk/js?client-id=AX8s0c8qV3I8_8EORobzhGaQ7sg5m_9_vVfLUmXLqmJaEM2lYURoArIL9wjJDVxZ2EIHRKI8qWoZrKGK&currency=USD"></script>
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return fetch("{% url 'create_paypal_order' product.id %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            }).then(response => response.json())
+              .then(order => order.id);
+        },
+        onApprove: function(data, actions) {
+            return fetch("{% url 'capture_paypal_order' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ orderID: data.orderID })
+            }).then(response => response.json())
+              .then(order => {
+                  alert("Payment Successful! Order ID: " + order.id);
+                  window.location.href = "/shop/"; 
+              });
+        }
+    }).render("#paypal-button-container");
+</script>
+
+{% endblock %}
