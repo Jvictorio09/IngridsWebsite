@@ -130,10 +130,10 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
 
 
 import os
-from dotenv import load_dotenv
+import environ
 
-load_dotenv()  # Load environment variables from .env
+env = environ.Env()
 
-PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID")
-PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET")
-PAYPAL_API_BASE = os.getenv("PAYPAL_API_BASE")
+PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID', default='')
+PAYPAL_CLIENT_SECRET = env('PAYPAL_CLIENT_SECRET', default='')
+PAYPAL_API_BASE = env('PAYPAL_API_BASE', default='https://api-m.paypal.com')  # Defaulting to live API base
