@@ -130,6 +130,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@csrf_exempt
 def create_paypal_order(request, product_id):
     """Creates a PayPal order dynamically based on the selected product."""
     
