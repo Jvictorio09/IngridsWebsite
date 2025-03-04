@@ -15,7 +15,7 @@ urlpatterns = [
     path("send-free-guide/", views.send_free_guide, name="send_free_guide"),
      path('product/<int:product_id>/', views.product_detail_view, name='product_detail'),
 
-    path('paypal/create-order/<int:product_id>/', views.create_paypal_order, name='create_paypal_order'),
-    path('paypal/capture-order/', views.capture_paypal_order, name='capture_paypal_order'),
+    path('create-paypal-order/<int:product_id>/', views.create_paypal_order, name='create_paypal_order'),
+    path('capture-paypal-order/', views.capture_paypal_order, name='capture_paypal_order'),
     
 ]

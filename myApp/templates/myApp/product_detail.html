@@ -78,8 +78,12 @@
                     "Content-Type": "application/json",
                     "X-CSRFToken": "{{ csrf_token }}"
                 }
-            }).then(response => response.json())
-              .then(order => order.id);
+            })
+            .then(response => response.json())
+            .then(order => {
+                console.log("Order Created:", order);
+                return order.id;  // Ensure order ID is returned
+            });
         },
         onApprove: function(data, actions) {
             return fetch("{% url 'capture_paypal_order' %}", {
@@ -89,13 +93,15 @@
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
                 body: JSON.stringify({ orderID: data.orderID })
-            }).then(response => response.json())
-              .then(order => {
-                  alert("Payment Successful! Order ID: " + order.id);
-                  window.location.href = "/shop/"; 
-              });
+            })
+            .then(response => response.json())
+            .then(order => {
+                alert("✅ Payment Successful! Order ID: " + order.id);
+                window.location.href = "/shop/"; 
+            });
         }
     }).render("#paypal-button-container");
 </script>
+
 
 {% endblock %}

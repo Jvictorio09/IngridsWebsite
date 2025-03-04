@@ -120,32 +120,72 @@ def get_paypal_access_token():
     )
     return response.json()["access_token"]
 
-@csrf_exempt
-def create_paypal_order(request, product_id):
-    """Creates a PayPal order."""
-    product = Product.objects.get(id=product_id)
-    access_token = get_paypal_access_token()
+import requests
+import json
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.conf import settings
+from .models import Product
+import logging
 
-    order_data = {
-        "intent": "CAPTURE",
-        "purchase_units": [{
-            "amount": {
-                "currency_code": "USD",
-                "value": str(product.get_price())
-            }
-        }]
+logger = logging.getLogger(__name__)
+
+def create_paypal_order(request, product_id):
+    """Creates a PayPal order dynamically based on the selected product."""
+    
+    product = get_object_or_404(Product, id=product_id)  # Fetch product details
+    url = f"{settings.PAYPAL_API_BASE}/v2/checkout/orders"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {get_paypal_access_token()}"
     }
 
-    response = requests.post(
-        f"{PAYPAL_API_BASE}/v2/checkout/orders",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {access_token}"
-        },
-        json=order_data,
-    )
+    data = {
+    "intent": "CAPTURE",
+    "purchase_units": [
+        {
+            "reference_id": str(product.id),
+            "description": product.name,
+            "amount": {
+                "currency_code": "USD",
+                "value": str(product.price),  # Total amount
+                "breakdown": {
+                    "item_total": {
+                        "currency_code": "USD",
+                        "value": str(product.price)  # Ensure this matches the total
+                    }
+                }
+            },
+            "items": [
+                {
+                    "name": product.name,
+                    "sku": str(product.id),
+                    "unit_amount": {
+                        "currency_code": "USD",
+                        "value": str(product.price)
+                    },
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+}
 
-    return JsonResponse(response.json())
+
+    response = requests.post(url, headers=headers, json=data)
+    
+    try:
+        response_json = response.json()
+        logger.error(f"PayPal API Response: {response_json}")  # Log PayPal's response
+    except Exception as e:
+        logger.error(f"Error decoding PayPal response: {e}")
+        return JsonResponse({"error": "Invalid PayPal response"}, status=400)
+
+    if response.status_code == 201:
+        return JsonResponse(response_json)
+    else:
+        return JsonResponse(response_json, status=response.status_code)
+
 
 @csrf_exempt
 def capture_paypal_order(request):
