@@ -33,6 +33,10 @@ ALLOWED_HOSTS = [
     'www.ingridcruysberghs.com'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.ingridcruysberghs.com",  # Add trusted origin
+]
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
