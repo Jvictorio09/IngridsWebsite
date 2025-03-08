@@ -1,11 +1,90 @@
 {% load static %}
-{% load image_tags %}
+
+<style>
+    /* Cart Sidebar Styles */
+    .cart-sidebar {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 350px;
+        height: 100vh;
+        background: white;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 20px;
+        border-left: 2px solid #BC9E82;
+    }
+
+    .cart-sidebar.open {
+        right: 0;
+    }
+
+    .cart-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .cart-img img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .cart-details {
+        flex-grow: 1;
+        margin-left: 10px;
+    }
+
+    .cart-details h5 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .remove-btn a {
+        color: red;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .cart-total {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .checkout-btn {
+        display: block;
+        text-align: center;
+        background: #BC9E82;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 10px;
+    }
+
+    .checkout-btn:hover {
+        background: #a6856e;
+    }
+</style>
 
 <header class="main-header-three">
     <nav class="main-menu main-menu-three">
         <div class="main-menu-three__wrapper">
             <div class="main-menu-three__wrapper-inner">
-
                 <!-- Logo Section -->
                 <div class="main-menu-three__logo">
                     <a href="{% url 'index' %}">
@@ -15,58 +94,210 @@
 
                 <!-- Main Menu -->
                 <div class="main-menu-three__main-menu-box">
-                    <!-- Mobile Navigation Toggle -->
                     <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                     <ul class="main-menu__list">
-                        <li class="{% if request.path == '/' %}active{% endif %}">
-                            <a href="{% url 'index' %}">Home <span class="main-menu-border"></span></a>
-                        </li>
-                        <li class="{% if request.path == '/about/' %}active{% endif %}">
-                            <a href="{% url 'about' %}">About <span class="main-menu-border"></span></a>
-                        </li>
-                        <li class="{% if request.path == '/readings/' %}active{% endif %}">
-                            <a href="{% url 'readings' %}">Readings <span class="main-menu-border"></span></a>
-                        </li>
-                        <li class="{% if request.path == '/booking/' %}active{% endif %}">
-                            <a href="{% url 'booking' %}">Bookings <span class="main-menu-border"></span></a>
-                        </li>
-                        <li class="{% if request.path == '/business/' %}active{% endif %}">
-                            <a href="{% url 'business' %}">Business <span class="main-menu-border"></span></a>
-                        </li>
-                        <li class="{% if request.path == '/guidanceplan/' %}active{% endif %}">
-                            <a href="{% url 'guidanceplan' %}">Guidance Plan <span class="main-menu-border"></span></a>
-                        </li>
-                        <li class="{% if request.path == '/shop/' %}active{% endif %}">
-                            <a href="{% url 'shop' %}">Shop <span class="main-menu-border"></span></a>
-                        </li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'readings' %}">Readings</a></li>
+                        <li><a href="{% url 'booking' %}">Bookings</a></li>
+                        <li><a href="{% url 'business' %}">Business</a></li>
+                        <li><a href="{% url 'guidanceplan' %}">Guidance Plan</a></li>
+                        <li><a href="{% url 'shop' %}">Shop</a></li>
                     </ul>
-                    
-                    
                 </div>
 
-                <!-- Social Media and Contact -->
-                <div class="main-menu-three__right">
-                    <div class="main-menu-three__search-side-content-login-box">
-                        <div class="main-menu-three__social-icons">
-                            <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank" title="WhatsApp" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                            <a href="mailto:ingrid@ingridcruysberghs.com" target="_blank" title="Email" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                            <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank" title="Instagram" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank" title="Facebook" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank" title="LinkedIn" style="color: #BC9E82; font-size: 18px; margin-right: 15px;">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
+                <!-- Cart Button -->
+                <div class="main-menu-three__cart">
+                    <a href="#" id="cart-button">
+                        <i class="fas fa-shopping-cart" style="color: rgb(199, 198, 198);"></i> 
+                        <span id="cart-counter" style="color: black;">{{ request.session.cart|length|default:0 }}</span>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 </header>
+
+<!-- Cart Sidebar -->
+<div class="cart-sidebar">
+    <div class="widget-heading">
+        <button class="close-side-widget">X</button>
+    </div>
+
+    <div class="cart-content">
+        <h4>🛒 Your Shopping Cart</h4>
+        <ul class="cart-list">
+            {% for key, item in request.session.cart.items %}
+            <li class="cart-item">
+                <div class="cart-img">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                </div>
+                <div class="cart-details">
+                    <h5>{{ item.name }}</h5>
+                    <p>Price: ${{ item.price }}</p>
+                    <p>Quantity: <span class="cart-quantity">{{ item.quantity }}</span></p>
+                </div>
+                <div class="remove-btn">
+                    <a href="#" class="remove-from-cart" data-id="{{ key }}">X</a>
+                </div>
+            </li>
+            {% empty %}
+            <p>Your cart is empty.</p>
+            {% endfor %}
+        </ul>
+        <h3 class="cart-total">Total: $<span id="cart-total">0.00</span></h3>
+        <a href="#" id="paypal-checkout-btn" class="checkout-btn">Proceed to Payment</a>
+
+
+    </div>
+</div>
+
+<!-- JavaScript for Cart -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cartButton = document.getElementById("cart-button");
+    const sidebarCart = document.querySelector(".cart-sidebar");
+
+    // Open sidebar when clicking cart
+    if (cartButton && sidebarCart) {
+        cartButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            sidebarCart.classList.add("open");
+        });
+    }
+
+    // Close sidebar
+    document.querySelector(".close-side-widget").addEventListener("click", function () {
+        sidebarCart.classList.remove("open");
+    });
+
+    // Update Cart Sidebar Function
+    function updateCartSidebar(cartItems) {
+    console.log("🛒 Updating Cart Sidebar:", cartItems);
+
+    let cartList = document.querySelector(".cart-list");
+    let cartTotalElement = document.getElementById("cart-total");
+    let paypalCheckoutBtn = document.getElementById("paypal-checkout-btn");
+
+    if (!cartList || !cartTotalElement) {
+        console.error("❌ Cart elements not found.");
+        return;
+    }
+
+    cartList.innerHTML = "";
+    let totalPrice = 0;
+    let orderItems = [];
+
+    if (cartItems.length === 0) {
+        cartList.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotalElement.innerText = "0.00";
+        paypalCheckoutBtn.style.display = "none";
+        return;
+    }
+
+    cartItems.forEach(item => {
+        let cartItem = document.createElement("li");
+        cartItem.classList.add("cart-item");
+        cartItem.innerHTML = `
+            <div class="cart-img">
+                <img src="${item.image_url}" alt="${item.name}">
+            </div>
+            <div class="cart-details">
+                <h5>${item.name}</h5>
+                <p>Price: $${item.price}</p>
+                <p>Quantity: <span class="cart-quantity">${item.quantity}</span></p>
+            </div>
+            <div class="remove-btn">
+                <a href="#" class="remove-from-cart" data-id="${item.id}">X</a>
+            </div>
+        `;
+        cartList.appendChild(cartItem);
+        totalPrice += parseFloat(item.price) * item.quantity;
+
+        orderItems.push({
+            name: item.name,
+            unit_amount: { currency_code: "USD", value: item.price },
+            quantity: item.quantity
+        });
+    });
+
+    cartTotalElement.innerText = totalPrice.toFixed(2);
+    paypalCheckoutBtn.style.display = "block"; 
+
+    // Store order details for PayPal checkout
+    paypalCheckoutBtn.setAttribute("data-order", JSON.stringify(orderItems));
+    paypalCheckoutBtn.setAttribute("data-total", totalPrice.toFixed(2));
+}
+
+
+
+    // Remove items from cart
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-from-cart")) {
+            event.preventDefault();
+            let productId = event.target.getAttribute("data-id");
+
+            fetch("{% url 'remove_from_cart' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ product_id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartSidebar(data.cart_items);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let paypalCheckoutBtn = document.getElementById("paypal-checkout-btn");
+
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            let orderItems = JSON.parse(paypalCheckoutBtn.getAttribute("data-order"));
+            let totalPrice = paypalCheckoutBtn.getAttribute("data-total");
+
+            return fetch("{% url 'create_paypal_cart_order' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({
+                    items: orderItems,
+                    total: totalPrice
+                })
+            })
+            .then(response => response.json())
+            .then(order => {
+                console.log("✅ PayPal Order Created:", order);
+                return order.id;
+            });
+        },
+        onApprove: function(data, actions) {
+            return fetch("{% url 'capture_paypal_order' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ orderID: data.orderID })
+            })
+            .then(response => response.json())
+            .then(order => {
+                alert("✅ Payment Successful! Order ID: " + order.id);
+                window.location.href = "/shop/";
+            });
+        }
+    }).render("#paypal-checkout-btn");
+});
+
+</script>

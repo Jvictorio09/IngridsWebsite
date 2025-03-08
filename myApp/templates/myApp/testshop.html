@@ -71,13 +71,61 @@
                 <h3>{{ product.name }}</h3>
             </a>
             <p class="price">${{ product.price }}</p>
-            <a href="#" class="add-to-cart">Add to cart</a>
+            <a href="#" class="add-to-cart" data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">Add to Cart</a>
         </div>
         {% empty %}
         <p class="text-center">No products available at the moment.</p>
         {% endfor %}
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cartButtons = document.querySelectorAll(".add-to-cart");
+    
+        cartButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+    
+                let productId = this.getAttribute("data-id");
+                let productName = this.getAttribute("data-name");
+                let productPrice = this.getAttribute("data-price");
+    
+                fetch("{% url 'add_to_cart' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        name: productName,
+                        price: productPrice
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                if (data.success) {
+                    updateCartCounter(data.cart_count);
+                    updateCartSidebar(data.cart_items);  // 🔥 Ensure the sidebar updates
+                    document.querySelector(".cart-sidebar").classList.add("open"); // 🔥 Open sidebar
+                } else {
+                    alert("⚠️ Error adding to cart!");
+                }
+            })
+                .catch(error => console.error("Error:", error));
+            });
+        });
+    
+        function updateCartCounter(count) {
+            let cartCounter = document.getElementById("cart-counter");
+            if (cartCounter) {
+                cartCounter.innerText = count;
+            }
+        }
+    });
+    </script>
+    
 
 {% include 'myApp/sidebar_widget.html' %}
 {% endblock %}

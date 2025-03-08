@@ -1,0 +1,242 @@
+{% load static %}
+
+sdsadasdasd
+<div class="xs-sidebar-group info-group info-sidebar cart-sidebar">
+    <div class="xs-overlay xs-bg-black"></div>
+    <div class="xs-sidebar-widget">
+        <div class="sidebar-widget-container">
+            <div class="widget-heading">
+                <a href="#" class="close-side-widget">X</a>
+            </div>
+            <div class="sidebar-textwidget">
+                <div class="sidebar-info-contents">
+                    <div class="content-inner">
+                        <div class="logo">
+                            <a href="{% url 'index' %}">
+                                <img src="{% static 'assets/images/resources/logo-1.png' %}" alt="Logo">
+                            </a>
+                        </div>
+
+                        <div class="cart-content">
+                            <h4>🛒 Your Shopping Cart</h4>
+
+                            {% if cart %}
+                                <ul class="cart-list">
+                                    {% for key, item in cart.items %}
+                                    <li class="cart-item">
+                                        <div class="cart-img">
+                                            <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                                        </div>
+                                        <div class="cart-details">
+                                            <h5>{{ item.name }}</h5>
+                                            <p>Price: ${{ item.price }}</p>
+                                            <p>Quantity: 
+                                                <span class="cart-quantity" data-id="{{ key }}">{{ item.quantity }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="remove-btn">
+                                            <a href="#" class="remove-from-cart" data-id="{{ key }}">X</a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <h3 class="cart-total">Total: $<span id="cart-total">{{ total_price }}</span></h3>
+                                <a href="{% url 'checkout' %}" class="thm-btn form-inner__btn checkout-btn">Proceed to Checkout</a>
+                            {% else %}
+                                <p>Your cart is empty.</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="close-sidebar">
+                            <button class="close-side-widget">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Cart Functionality -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let cartButton = document.getElementById("cart-button");
+        let sidebarCart = document.querySelector(".cart-sidebar");
+    
+        // Open cart sidebar when clicking the cart icon
+        if (cartButton && sidebarCart) {
+            cartButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                sidebarCart.classList.add("open");
+            });
+        }
+    
+        // Handle Add to Cart Click
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                let productId = this.getAttribute("data-id");
+                let productName = this.getAttribute("data-name");
+                let productPrice = this.getAttribute("data-price");
+    
+                fetch("{% url 'add_to_cart' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        name: productName,
+                        price: productPrice
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateCartCounter(data.cart_count);
+                        updateCartSidebar(data.cart_items);
+                        sidebarCart.classList.add("open"); // Open cart sidebar
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            });
+        });
+    
+        // Update Cart Counter
+        function updateCartCounter(count) {
+            let cartCounter = document.getElementById("cart-counter");
+            if (cartCounter) {
+                cartCounter.innerText = count;
+            }
+        }
+    
+        // Update Cart Sidebar Items
+        function updateCartSidebar(cartItems) {
+    console.log("Updating Cart Sidebar with:", cartItems); // Debugging
+
+    let cartList = document.querySelector(".cart-list");
+    let cartTotal = document.getElementById("cart-total");
+
+    if (!cartList || !cartTotal) {
+        console.error("Cart elements missing from the DOM.");
+        return;
+    }
+
+    cartList.innerHTML = "";  // Clear previous items
+    let totalPrice = 0;
+
+    cartItems.forEach(item => {
+        let cartItem = document.createElement("li");
+        cartItem.classList.add("cart-item");
+        cartItem.innerHTML = `
+            <div class="cart-img">
+                <img src="${item.image_url}" alt="${item.name}">
+            </div>
+            <div class="cart-details">
+                <h5>${item.name}</h5>
+                <p>Price: $${item.price}</p>
+                <p>Quantity: <span class="cart-quantity">${item.quantity}</span></p>
+            </div>
+            <div class="remove-btn">
+                <a href="#" class="remove-from-cart" data-id="${item.id}">X</a>
+            </div>
+        `;
+        cartList.appendChild(cartItem);
+        totalPrice += parseFloat(item.price) * item.quantity;
+    });
+
+    cartTotal.innerText = totalPrice.toFixed(2);
+}
+
+    
+        // Close Sidebar
+        document.querySelectorAll(".close-side-widget").forEach(button => {
+            button.addEventListener("click", function () {
+                sidebarCart.classList.remove("open");
+            });
+        });
+    });
+    </script>
+    
+    
+
+<style>
+.cart-sidebar {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 350px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cart-img img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-details {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.cart-details h5 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.remove-btn a {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cart-total {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.checkout-btn {
+    display: block;
+    text-align: center;
+    background: #BC9E82;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.checkout-btn:hover {
+    background: #a6856e;
+}
+</style>
