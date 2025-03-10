@@ -61,14 +61,16 @@
     </div>
     <div class="product-details">
         <h1 class="product-title">{{ product.name }}</h1>
-        <p class="product-price">${{ product.get_price }}</p>
+        <p class="product-price">€{{ product.get_price }}</p>
         <p class="product-description">{{ product.description }}</p>
         <div id="paypal-button-container" class="paypal-button-container"></div>
     </div>
 </div>
 
 <!-- PayPal SDK (LIVE MODE) -->
-<script src="https://www.paypal.com/sdk/js?client-id=AX8s0c8qV3I8_8EORobzhGaQ7sg5m_9_vVfLUmXLqmJaEM2lYURoArIL9wjJDVxZ2EIHRKI8qWoZrKGK&currency=USD"></script>
+<!-- PayPal SDK with EUR -->
+<script src="https://www.paypal.com/sdk/js?client-id=AX8s0c8qV3I8_8EORobzhGaQ7sg5m_9_vVfLUmXLqmJaEM2lYURoArIL9wjJDVxZ2EIHRKI8qWoZrKGK&currency=EUR"></script>
+
 <script>
     paypal.Buttons({
         createOrder: function(data, actions) {
