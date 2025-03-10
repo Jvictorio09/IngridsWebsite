@@ -71,7 +71,7 @@
                 <h3>{{ product.name }}</h3>
             </a>
             <p class="price">${{ product.price }}</p>
-            <a href="#" class="add-to-cart">Add to cart</a>
+            <a href="{% url 'product_detail' product.id %}" class="add-to-cart">View Product</a>
         </div>
         {% empty %}
         <p class="text-center">No products available at the moment.</p>
