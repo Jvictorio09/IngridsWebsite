@@ -75,8 +75,13 @@
 }
 
 .coaching-services img {
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    border-radius: 60% / 50%; /* Creates an oval shape */
+    object-fit: cover;
+    max-width: 350px;
+    display: block;
+    margin: 0 auto;
 }
 
 .coaching-plans {
@@ -343,6 +348,18 @@
     }
 }
 
+.coaching-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 60% / 50%; /* Creates an oval shape */
+    object-fit: cover;
+    max-width: 350px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+
     </style>
     
 <section class="coaching-section">
@@ -351,7 +368,7 @@
             <!-- Image Section -->
             <div class="col-lg-6">
                 <div class="coaching-image">
-                    <img src="{% webp_image 'assets/images/ingrid/sittingwithlaptop.webp' %}" alt="Coaching for Next Level" class="img-fluid" loading="lazy">
+                    <img src="{% webp_image 'assets/images/ingrid/330x470.webp' %}" alt="Coaching for Next Level" class="img-fluid" loading="lazy">
                 </div>
             </div>
             <!-- Text Section -->
@@ -374,14 +391,17 @@
         <!-- Service 1 -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-6">
-                <img src="{% webp_image 'assets/images/ingrid/guidance.png' %}" alt="Powerful Guidance Plan" class="img-fluid rounded">
-            </div>
-            <div class="col-lg-6">
                 <h2 style="padding-top: 8px;">1:1 Powerful Guidance Plan</h2>
                 <p><strong>Powerful Guidance Plan</strong><br>
                     Are you ready for transformative change in your life? This unique plan combines reading, healing, and coaching to align your energy and purpose. We’ll explore your energetic field, uncover your soul’s mission, and clear any blocks that may be holding you back. Through weekly or bi-weekly sessions, you’ll receive practical tools, deep healing, and intuitive insights to create lasting change and step into the life you’ve always dreamed of.
                 </p>
             </div>
+            <div class="col-lg-6">
+                <img src="{% webp_image 'assets/images/ingrid/tree.webp' %}" 
+                     alt="Powerful Guidance Plan" 
+                     class="img-fluid custom-oval-image">
+            </div>
+            
         </div>
 
         <!-- Service 2 -->

@@ -145,6 +145,18 @@
     100% { opacity: 0; transform: translateY(-15px); }
 }
 
+.about-five__img-box {
+    opacity: 0; /* Hide initially */
+    transform: translateX(50px); /* Move slightly right */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.about-five__img-box.loaded {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
 
 </style>
 
@@ -502,6 +514,29 @@
     </div>
 </section>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const imgBox = document.querySelector(".about-five__img-box");
+        const images = imgBox.querySelectorAll("img");
+        let imagesLoaded = 0;
+    
+        images.forEach(img => {
+            img.onload = function() {
+                imagesLoaded++;
+                if (imagesLoaded === images.length) {
+                    imgBox.classList.add("loaded");
+                }
+            };
+    
+            // Handle cached images that load instantly
+            if (img.complete) {
+                img.onload();
+            }
+        });
+    });
+    </script>
+    
 
 {% include 'myApp/sidebar_widget.html' %}
 {% endblock %}

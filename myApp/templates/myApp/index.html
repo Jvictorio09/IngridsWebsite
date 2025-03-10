@@ -278,10 +278,42 @@
     transition: all 0.3s ease;
 }
 
+/* Hide the floating circle on larger screens */
+.floating-circle {
+    display: none;
+}
+
+/* Show the floating circle only on mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .floating-circle {
+        display: block;
+        position: fixed; /* Keeps it floating as the user scrolls */
+        top: 14%; /* Places it before the middle of the page */
+        left: 3%; /* Positions it 3% from the left */
+        width: 110px; /* Adjust size */
+        height: 110px; /* Maintain a perfect circle */
+        border-radius: 50%; /* Ensures circular shape */
+        object-fit: cover; /* Prevents distortion */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Adds depth */
+        z-index: 9999; /* Keeps it above other elements */
+        animation: floatAnimation 3s ease-in-out infinite alternate; /* Floating effect */
+    }
+}
+
+/* Floating animation effect */
+@keyframes floatAnimation {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10px); /* Gentle floating effect */
+    }
+}
 
 
 
 </style>
+
 <!-- Signup Modal -->
 <div id="welcomeModal" class="modal">
     <div class="modal-content">
@@ -311,12 +343,16 @@
     </div>
 </div>
 
+<img src="{% static 'assets/images/ingrid/zoomcircle.PNG' %}" 
+     alt="Floating Circle" 
+     class="floating-circle">
 
   
   
 
   
   <section class="intro-section">
+    
     <div class="container">
         <div class="row align-items-center">
             <!-- Text Section -->
