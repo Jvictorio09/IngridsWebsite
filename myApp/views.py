@@ -130,7 +130,7 @@ def create_paypal_order(request, product_id):
         "intent": "CAPTURE",
         "purchase_units": [{
             "amount": {
-                "currency_code": "USD",
+                "currency_code": "EUR",
                 "value": str(product.get_price())
             }
         }]
