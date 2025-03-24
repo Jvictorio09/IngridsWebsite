@@ -40,33 +40,40 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.core.mail import send_mail
 
 @csrf_exempt
 def send_free_guide(request):
     if request.method == "POST":
         name = request.POST.get("name")
         email = request.POST.get("email")
-        guide_link = "https://docs.google.com/document/d/1y2drh4SuOeIyjhgQLDVRBDWu_LQ76HtLyd3v3zW20yY/edit?usp=sharing"
+        guide_link = "https://drive.google.com/drive/folders/1zYMnLzc_ixan4m6thajohjUIy-92X7Hm?usp=drive_link"
 
         # Email content
         subject = "Your Free Guide: Starting Your Story"
-        message = f"""
-        Hi {name},
+        message = f"""Hi There,
 
-        Thank you for signing up! 🎉
+Every great story begins with a single step, and this guide is here to help you take yours! 🌿📖
+In 'Starting Your Story: How to Begin Writing in Your Notebook', you'll discover simple yet powerful ways to start writing, find inspiration, and build a meaningful writing habit.
 
-        Here is your free guide to get started:  
-        📄 {guide_link}
+📎 Your free guide is attached—download it and let your creativity flow!
+{guide_link}
 
-        Happy writing! ✍️
-        - The Team
-        """
-        
+If you have any questions or need more tips, feel free to reach out.
+
+Happy writing!
+
+Ingrid Cruysberghs
+Guidance for You
+"""
+
         try:
             send_mail(
                 subject,
                 message,
-                "juliavictorio16@gmail.com",  # Change to your default email
+                "juliavictorio16@gmail.com",  # Replace with your default email
                 [email],
                 fail_silently=False,
             )
