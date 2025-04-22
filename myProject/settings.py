@@ -137,3 +137,20 @@ env = environ.Env()
 PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID', default='')
 PAYPAL_CLIENT_SECRET = env('PAYPAL_CLIENT_SECRET', default='')
 PAYPAL_API_BASE = env('PAYPAL_API_BASE', default='https://api-m.paypal.com')  # Defaulting to live API base
+
+
+
+import os
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": env("CLOUDINARY_API_KEY"),
+    "API_SECRET": env("CLOUDINARY_API_SECRET"),
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
