@@ -55,10 +55,10 @@ def send_free_guide(request):
         subject = "Your Free Guide: Starting Your Story"
         message = f"""Hi There,
 
-Every great story begins with a single step, and this guide is here to help you take yours! 🌿📖
-In 'Starting Your Story: How to Begin Writing in Your Notebook', you'll discover simple yet powerful ways to start writing, find inspiration, and build a meaningful writing habit.
+Every great story begins with a single step, and this guide is here to help you take yours! 🌿📖  
+In 'Starting Your Story: How to Begin Writing in Your Notebook', you'll discover simple yet powerful ways to start writing, find inspiration, and build a meaningful writing habit.  
 
-📎 Your free guide is attached—download it and let your creativity flow!
+📎 Your free guide is attached—download it and let your creativity flow!  
 {guide_link}
 
 If you have any questions or need more tips, feel free to reach out.
@@ -73,7 +73,7 @@ Guidance for You
             send_mail(
                 subject,
                 message,
-                "juliavictorio16@gmail.com",  # Replace with your default email
+                "ingrid@ingridcruysberghs.com",  # Replace with your default email
                 [email],
                 fail_silently=False,
             )
