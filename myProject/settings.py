@@ -33,6 +33,10 @@ ALLOWED_HOSTS = [
     'www.ingridcruysberghs.com'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.ingridcruysberghs.com',
+]
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -127,6 +131,8 @@ EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+
+
 
 
 import os
