@@ -49,7 +49,7 @@ def send_free_guide(request):
     if request.method == "POST":
         name = request.POST.get("name")
         email = request.POST.get("email")
-        guide_link = "https://drive.google.com/drive/folders/1zYMnLzc_ixan4m6thajohjUIy-92X7Hm?usp=drive_link"
+        guide_link = "https://drive.google.com/file/d/1rhp0sk79IqAVqYIC8mbsjSt8Zi6boUqZ/view?usp=sharing"
 
         # Email content
         subject = "Your Free Guide: Starting Your Story"
