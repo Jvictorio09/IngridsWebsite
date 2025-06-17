@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{{ page_title|default:"Ingrid Cruysberghs: Life Coach and Consultant" }}{% endblock %}</title>
-    <meta name="description" content="{{ page_description|default:'Discover how Ingrid can help you find healing, clarity, and empowerment through spiritual insights and guidance.' }}">
+    <title>{% block title %}{{ page_title|default:"Ingrid Cruysberghs | Transformational Life Coach & Intuitive Guide" }}{% endblock %}</title>
+    <meta name="description" content="{{ page_description|default:'Ingrid Cruysberghs is a transformational life coach offering intuitive guidance, spiritual clarity, and emotional healing worldwide.' }}">
 
    
     <!-- Favicons -->
@@ -49,6 +49,23 @@
     <!-- Template Styles -->
     <link rel="stylesheet" href="{% static 'assets/css/meciy.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/meciy-responsive.css' %}" />
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Ingrid Cruysberghs",
+          "jobTitle": "Transformational Life Coach",
+          "url": "https://yourdomain.com",
+          "sameAs": [
+            "https://www.instagram.com/ingridcruysberghs/",
+            "https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/",
+            "https://www.facebook.com/ingrid.cruysberghswouters/"
+          ],
+          "description": "Ingrid Cruysberghs helps individuals find healing, clarity, and empowerment through spiritual coaching and personalized guidance."
+        }
+        </script>
+        
     {% block extra_head %}
     {% endblock %}
 </head>
