@@ -154,9 +154,31 @@ def create_paypal_order(request, product_id):
 
     return JsonResponse(response.json())
 
+from django.core.mail import send_mail
+
+def send_product_link_to_buyer(email, name, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        if product.pdf_link:
+            subject = f"Download Your Product: {product.name}"
+            message = f"""
+Hi {name or 'there'},
+
+Thank you for purchasing {product.name}!
+
+You can download your product here:
+{product.pdf_link}
+
+Enjoy!
+– The Ingrid Team
+"""
+            send_mail(subject, message, 'noreply@yourdomain.com', [email])
+    except Product.DoesNotExist:
+        pass
+
+
 @csrf_exempt
 def capture_paypal_order(request):
-    """Captures PayPal order after approval."""
     data = json.loads(request.body)
     order_id = data.get("orderID")
     access_token = get_paypal_access_token()
@@ -169,4 +191,17 @@ def capture_paypal_order(request):
         },
     )
 
-    return JsonResponse(response.json())
+    capture_data = response.json()
+
+    try:
+        buyer_email = capture_data["payer"]["email_address"]
+        buyer_name = capture_data["payer"]["name"]["given_name"]
+    except KeyError:
+        buyer_email = None
+        buyer_name = None
+
+    # Optionally send email with product PDF link
+    if buyer_email:
+        send_product_link_to_buyer(buyer_email, buyer_name, data.get("product_id"))
+
+    return JsonResponse(capture_data)

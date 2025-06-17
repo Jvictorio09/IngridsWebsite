@@ -148,17 +148,16 @@
 
 <!-- Template JS -->
 <script src="{% static 'assets/js/meciy.js' %}"></script>
-<script>
-    window.addEventListener("scroll", function() {
-    const whatsappIcon = document.querySelector(".whatsapp-icon");
-    if (window.scrollY > 100) {
-        whatsappIcon.style.display = "block";
-    } else {
-        whatsappIcon.style.display = "none";
-    }
-});
-
-</script>
+    <script>
+        window.addEventListener("scroll", function() {
+        const whatsappIcon = document.querySelector(".whatsapp-icon");
+        if (window.scrollY > 100) {
+            whatsappIcon.style.display = "block";
+        } else {
+            whatsappIcon.style.display = "none";
+        }
+    });
+    </script>
 
 </body>
 
