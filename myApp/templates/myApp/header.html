@@ -1,20 +1,153 @@
 {% load static %}
 {% load image_tags %}
-{% load extras %} 
+{% load extras %}
 
+<!-- Font Awesome (for social icons) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<!-- Styles -->
+<style>
+    /* Default - hide mobile components */
+    .mobile-burger,
+    .mobile-overlay,
+    .mobile-drawer {
+        display: none;
+    }
+
+    @media (max-width: 992px) {
+        .main-menu-three__main-menu-box,
+        .main-menu-three__right {
+            display: none !important;
+        }
+
+        .main-menu-three__wrapper-inner {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-burger {
+            display: block;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 12px 20px;
+            z-index: 10001;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            display: none;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 260px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: right 0.3s ease-in-out;
+            padding: 20px;
+        }
+
+        .mobile-drawer.active {
+            right: 0;
+        }
+
+        .mobile-drawer ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            flex-grow: 1;
+        }
+
+        .mobile-drawer ul li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-drawer ul li a {
+            color: #333;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .mobile-close {
+            font-size: 22px;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .mobile-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        .mobile-socials a {
+            color: #333;
+            font-size: 18px;
+        }
+    }
+</style>
+
+<!-- Mobile Header Components -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-drawer" id="mobileDrawer">
+    <div>
+        <div class="mobile-close" id="mobileClose">✖</div>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'readings' %}">Readings</a></li>
+            <li><a href="{% url 'booking' %}">Bookings</a></li>
+            <li><a href="{% url 'business' %}">Business</a></li>
+            <li><a href="{% url 'guidanceplan' %}">Guidance Plan</a></li>
+            <li><a href="{% url 'shop' %}">Shop</a></li>
+        </ul>
+    </div>
+    <div class="mobile-socials">
+        <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:ingrid@ingridcruysberghs.com" target="_blank"><i class="fa fa-envelope"></i></a>
+        <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+</div>
+
+<!-- Header -->
 <header class="main-header-three">
     <nav class="main-menu main-menu-three">
         <div class="main-menu-three__wrapper">
-            <div class="main-menu-three__wrapper-inner">
+            <div class="main-menu-three__wrapper-inner d-flex align-items-center justify-content-between">
 
-                <!-- Logo Section -->
+                <!-- Burger Icon -->
+                <div class="mobile-burger" id="mobileBurger">☰</div>
+
+                <!-- Logo -->
                 <div class="main-menu-three__logo">
                     <a href="{% url 'index' %}">
                         <img src="{% static 'assets/images/resources/ingrids_logo.png' %}" alt="Logo">
                     </a>
                 </div>
 
-                <!-- Main Menu -->
+                <!-- Desktop Menu -->
                 <div class="main-menu-three__main-menu-box">
                     <ul class="main-menu__list">
                         {% with request.path as current_path %}
@@ -22,52 +155,39 @@
                             <a href="{% url 'index' %}">Home</a>
                         </li>
                         <li class="{% if '/index/' in current_path %}current{% endif %}">
-                            <a href="{% url 'index' %}">Home <span class="main-menu-border"></span></a>
+                            <a href="{% url 'index' %}">Home</a>
                         </li>
                         <li class="{% if '/about/' in current_path %}current{% endif %}">
-                            <a href="{% url 'about' %}">About <span class="main-menu-border"></span></a>
+                            <a href="{% url 'about' %}">About</a>
                         </li>
                         <li class="{% if '/readings' in current_path %}current{% endif %}">
-                            <a href="{% url 'readings' %}">Readings <span class="main-menu-border"></span></a>
+                            <a href="{% url 'readings' %}">Readings</a>
                         </li>
                         <li class="{% if '/booking' in current_path %}current{% endif %}">
-                            <a href="{% url 'booking' %}">Bookings <span class="main-menu-border"></span></a>
+                            <a href="{% url 'booking' %}">Bookings</a>
                         </li>
                         <li class="{% if '/business' in current_path %}current{% endif %}">
-                            <a href="{% url 'business' %}">Business <span class="main-menu-border"></span></a>
+                            <a href="{% url 'business' %}">Business</a>
                         </li>
                         <li class="{% if '/guidanceplan' in current_path %}current{% endif %}">
-                            <a href="{% url 'guidanceplan' %}">Guidance Plan <span class="main-menu-border"></span></a>
+                            <a href="{% url 'guidanceplan' %}">Guidance Plan</a>
                         </li>
                         <li class="{% if '/shop' in current_path %}current{% endif %}">
-                            <a href="{% url 'shop' %}">Shop <span class="main-menu-border"></span></a>
+                            <a href="{% url 'shop' %}">Shop</a>
                         </li>
-                    {% endwith %}
-                    
-
-
+                        {% endwith %}
                     </ul>
                 </div>
 
-                <!-- Right Side: Socials -->
+                <!-- Right Side Socials (Desktop Only) -->
                 <div class="main-menu-three__right">
                     <div class="main-menu-three__search-side-content-login-box">
                         <div class="main-menu-three__social-icons">
-                            <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank" title="WhatsApp">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                            <a href="mailto:ingrid@ingridcruysberghs.com" target="_blank" title="Email">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                            <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank" title="Facebook">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank" title="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
+                            <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:ingrid@ingridcruysberghs.com" target="_blank"><i class="fa fa-envelope"></i></a>
+                            <a href="https://www.instagram.com/ingridcruysberghs/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/ingrid.cruysberghswouters/" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/" target="_blank"><i class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
                 </div>
@@ -76,3 +196,22 @@
         </div>
     </nav>
 </header>
+
+<!-- Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const burger = document.getElementById("mobileBurger");
+        const drawer = document.getElementById("mobileDrawer");
+        const overlay = document.getElementById("mobileOverlay");
+        const closeBtn = document.getElementById("mobileClose");
+
+        function toggleDrawer() {
+            drawer.classList.toggle("active");
+            overlay.classList.toggle("active");
+        }
+
+        burger.addEventListener("click", toggleDrawer);
+        overlay.addEventListener("click", toggleDrawer);
+        closeBtn.addEventListener("click", toggleDrawer);
+    });
+</script>
