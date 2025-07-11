@@ -316,33 +316,7 @@
 </style>
 
 <!-- Signup Modal -->
-<div id="welcomeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-inner">
-            <!-- Text Section -->
-            <div class="modal-text">
-                <h2>Psst... "Unlock Your Writing Journey!"</h2>
-                <p>Sign up now and get instant access to my free guide:</p>
-                <h3>Starting Your Story - How to Begin Writing in Your Notebook</h3>
-                <p>Take the first step toward your creative goals today!</p>
-                <form id="emailSignupForm">
-                    <input type="text" name="name" id="name" placeholder="Name" required>
-                    <input type="email" name="email" id="email" placeholder="Email Address" required>
-                    <button type="submit">Get the Free Guide</button>
-                </form>
-                <p id="successMessage" style="color: green; display: none;">✅ Check your email for the free guide!</p>
-            </div>
-            <!-- Image Section -->
-            <div class="modal-image">
-                <img 
-                    src="{% static 'assets/images/ingrid/popup.jpeg' %}" 
-                    alt="Popup Image" 
-                    style="max-width: 100%; max-height: 80vh; object-fit: contain;">
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <img src="{% static 'assets/images/ingrid/zoomcircle.PNG' %}" 
      alt="Floating Circle" 
@@ -693,6 +667,35 @@
         </div>
     </div>
 </section>
+
+
+<div id="welcomeModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-inner">
+            <!-- Text Section -->
+            <div class="modal-text">
+                <h2>Psst... "Unlock Your Writing Journey!"</h2>
+                <p>Sign up now and get instant access to my free guide:</p>
+                <h3>Starting Your Story - How to Begin Writing in Your Notebook</h3>
+                <p>Take the first step toward your creative goals today!</p>
+                <form id="emailSignupForm">
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <input type="email" name="email" id="email" placeholder="Email Address" required>
+                    <button type="submit">Get the Free Guide</button>
+                </form>
+                <p id="successMessage" style="color: green; display: none;">✅ Check your email for the free guide!</p>
+            </div>
+            <!-- Image Section -->
+            <div class="modal-image">
+                <img 
+                    src="{% static 'assets/images/ingrid/popup.jpeg' %}" 
+                    alt="Popup Image" 
+                    style="max-width: 100%; max-height: 80vh; object-fit: contain;">
+            </div>
+        </div>
+    </div>
+</div>
 <script>
  document.addEventListener("DOMContentLoaded", function () {
     // Show the modal after 2 minutes (120000 ms)

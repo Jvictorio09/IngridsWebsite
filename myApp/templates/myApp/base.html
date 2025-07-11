@@ -1,195 +1,121 @@
 {% load static %}
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{{ page_title|default:"Ingrid Cruysberghs | Transformational Life Coach & Intuitive Guide" }}{% endblock %}</title>
-    <meta name="description" content="{{ page_description|default:'Ingrid Cruysberghs is a transformational life coach offering intuitive guidance, spiritual clarity, and emotional healing worldwide.' }}">
 
-   
+    <title>{% block title %}{{ page_title|default:"Ingrid Cruysberghs | Transformational Life Coach & Intuitive Guide" }}{% endblock %}</title>
+    
+    {% block meta_description %}
+    <meta name="description" content="{{ page_description|default:'Ingrid Cruysberghs is a transformational life coach offering intuitive guidance, spiritual clarity, and emotional healing worldwide.' }}">
+    {% endblock %}
+
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/ingrid/icon2.svg' %}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/ingrid/icon2.svg' %}"  />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/ingrid/icon2.svg' %}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/ingrid/icon2.svg' %}" />
     <link rel="manifest" href="{% static 'assets/images/ingrid/icon2.svg' %}" />
 
-    <!-- Open Graph (for Facebook, LinkedIn, WhatsApp, etc.) -->
-<!-- Open Graph Meta Tags -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.ingridcruysberghs.com/" />
-<meta property="og:title" content="Ingrid Cruysberghs | Transformational Life Coach" />
-<meta property="og:description" content="Discover how Ingrid helps you align your energy and transform your life through spiritual coaching and intuitive guidance." />
-<meta property="og:image" content="https://www.ingridcruysberghs.com/static/assets/images/ingrid/icon2.svg" />
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ingridcruysberghs.com/" />
+    <meta property="og:title" content="Ingrid Cruysberghs | Transformational Life Coach" />
+    <meta property="og:description" content="Discover how Ingrid helps you align your energy and transform your life through spiritual coaching and intuitive guidance." />
+    <meta property="og:image" content="https://www.ingridcruysberghs.com/static/assets/images/ingrid/ingrid1.webp" />
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ingrid Cruysberghs | Transformational Life Coach">
-<meta name="twitter:description" content="Find clarity, emotional freedom, and spiritual alignment with Ingrid's coaching programs.">
-<meta name="twitter:image" content="https://www.ingridcruysberghs.com/static/assets/images/ingrid/icon2.svg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ingrid Cruysberghs | Transformational Life Coach">
+    <meta name="twitter:description" content="Find clarity, emotional freedom, and spiritual alignment with Ingrid's coaching programs.">
+    <meta name="twitter:image" content="https://www.ingridcruysberghs.com/static/assets/images/ingrid/ingrid1.webp">
 
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ingrid Cruysberghs",
+      "jobTitle": "Transformational Life Coach",
+      "url": "https://www.ingridcruysberghs.com",
+      "image": "https://www.ingridcruysberghs.com/static/assets/images/ingrid/ingrid1.webp",
+      "sameAs": [
+        "https://www.instagram.com/ingridcruysberghs/",
+        "https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/",
+        "https://www.facebook.com/ingrid.cruysberghswouters/"
+      ],
+      "description": "Ingrid Cruysberghs helps individuals find healing, clarity, and empowerment through spiritual coaching and personalized guidance."
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/animate/custom-animate.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/nouislider/nouislider.pips.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/odometer/odometer.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/swiper/swiper.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/meciy-icons/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/tiny-slider/tiny-slider.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/reey-font/stylesheet.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/bxslider/jquery.bxslider.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-select/css/bootstrap-select.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/vegas/vegas.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/jquery-ui/jquery-ui.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/timepicker/timePicker.css' %}" />
-    <link rel="stylesheet" href="{% static 'assets/vendors/nice-select/nice-select.css' %}" />
-
-    <!-- Template Styles -->
     <link rel="stylesheet" href="{% static 'assets/css/meciy.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/meciy-responsive.css' %}" />
 
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Ingrid Cruysberghs",
-          "jobTitle": "Transformational Life Coach",
-          "url": "https://yourdomain.com",
-          "sameAs": [
-            "https://www.instagram.com/ingridcruysberghs/",
-            "https://www.linkedin.com/in/ingrid-cruysberghs-b982ba67/",
-            "https://www.facebook.com/ingrid.cruysberghswouters/"
-          ],
-          "description": "Ingrid Cruysberghs helps individuals find healing, clarity, and empowerment through spiritual coaching and personalized guidance."
-        }
-        </script>
-        
-    {% block extra_head %}
-    {% endblock %}
+    {% block extra_head %}{% endblock %}
 </head>
+
 <style>
-    /* General Styling */
+/* WhatsApp floating icon */
 .whatsapp-icon {
     position: fixed;
-    bottom: 20px; /* Adjust distance from the bottom */
-    right: 20px; /* Adjust distance from the left */
+    bottom: 20px;
+    right: 20px;
     z-index: 1000;
 }
-
 .whatsapp-icon a img {
-    width: 60px; /* Size of the WhatsApp icon */
+    width: 60px;
     height: 60px;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     animation: pulse 2s infinite;
 }
-
-/* Pulse Effect */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(37, 211, 102, 0.7);
-    }
-    50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 15px rgba(37, 211, 102, 0.7);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(37, 211, 102, 0.7);
-    }
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(37, 211, 102, 0.7); }
+    50% { transform: scale(1.1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.7); }
+    100% { transform: scale(1); box-shadow: 0 0 0 rgba(37, 211, 102, 0.7); }
 }
-
 </style>
 
 <body>
 
-    <!-- Preloader -->
     {% include 'myApp/preloader.html' %}
 
-    <!-- Main Wrapper -->
     <div class="page-wrapper">
-        <!-- Header -->
         {% include 'myApp/header.html' %}
+
         <div class="whatsapp-icon">
             <a href="https://api.whatsapp.com/send?phone=34951215346" target="_blank" rel="noopener noreferrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
             </a>
-        </div>        
-        <!-- Main Content -->
-        {% block content %}
+        </div>
 
+        {% block content %}{% endblock %}
 
-        {% endblock %}
-
-        <!-- Footer -->
         {% include 'myApp/footer.html' %}
     </div>
 
-    <!-- Mobile Navigation -->
     {% include 'myApp/mobile_nav.html' %}
 
-    <!-- Scripts -->
-    {% load static %}
+    <!-- JS -->
+    <script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/meciy.js' %}"></script>
 
-<!-- Vendor JS -->
-<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jquery-appear/jquery.appear.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jquery-validate/jquery.validate.min.js' %}"></script>
-<script src="{% static 'assets/vendors/nouislider/nouislider.min.js' %}"></script>
-<script src="{% static 'assets/vendors/odometer/odometer.min.js' %}"></script>
-<script src="{% static 'assets/vendors/swiper/swiper.min.js' %}"></script>
-<script src="{% static 'assets/vendors/tiny-slider/tiny-slider.min.js' %}"></script>
-<script src="{% static 'assets/vendors/wnumb/wNumb.min.js' %}"></script>
-<script src="{% static 'assets/vendors/wow/wow.js' %}"></script>
-<script src="{% static 'assets/vendors/isotope/isotope.js' %}"></script>
-<script src="{% static 'assets/vendors/countdown/countdown.min.js' %}"></script>
-<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
-<script src="{% static 'assets/vendors/bxslider/jquery.bxslider.min.js' %}"></script>
-<script src="{% static 'assets/vendors/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
-<script src="{% static 'assets/vendors/vegas/vegas.min.js' %}"></script>
-<script src="{% static 'assets/vendors/jquery-ui/jquery-ui.js' %}"></script>
-<script src="{% static 'assets/vendors/timepicker/timePicker.js' %}"></script>
-<script src="{% static 'assets/vendors/circleType/jquery.circleType.js' %}"></script>
-<script src="{% static 'assets/vendors/circleType/jquery.lettering.min.js' %}"></script>
-<script src="{% static 'assets/vendors/sidebar-content/jquery-sidebar-content.js' %}"></script>
-<script src="{% static 'assets/vendors/tweenmax/TweenMax.min.js' %}"></script>
-<script src="{% static 'assets/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
-
-<!-- Template JS -->
-<script src="{% static 'assets/js/meciy.js' %}"></script>
     <script>
-        window.addEventListener("scroll", function() {
-        const whatsappIcon = document.querySelector(".whatsapp-icon");
-        if (window.scrollY > 100) {
-            whatsappIcon.style.display = "block";
-        } else {
-            whatsappIcon.style.display = "none";
-        }
-    });
+        window.addEventListener("scroll", function () {
+            const whatsappIcon = document.querySelector(".whatsapp-icon");
+            whatsappIcon.style.display = (window.scrollY > 100) ? "block" : "none";
+        });
     </script>
-
 </body>
 
 </html>
