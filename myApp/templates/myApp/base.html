@@ -60,7 +60,12 @@
     <link rel="stylesheet" href="{% static 'assets/css/meciy.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/meciy-responsive.css' %}" />
 
+
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/owl.theme.default.min.css' %}">
+
     {% block extra_head %}{% endblock %}
+
 </head>
 
 <style>
@@ -106,8 +111,10 @@
     {% include 'myApp/mobile_nav.html' %}
 
     <!-- JS -->
+    <!-- JS (at the end of body) -->
     <script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
     <script src="{% static 'assets/js/meciy.js' %}"></script>
 
     <script>
