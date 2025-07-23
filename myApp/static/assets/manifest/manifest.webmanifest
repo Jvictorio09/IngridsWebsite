@@ -1,0 +1,28 @@
+{
+    "name": "Ingrid Cruysberghs",
+    "short_name": "Ingrid",
+    "description": "Transformational Life Coach & Intuitive Guide",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#dccccc",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "/static/assets/images/ingrid/icon2.svg",
+        "sizes": "any",
+        "type": "image/svg+xml"
+      },
+      {
+        "src": "/static/assets/images/ingrid/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/static/assets/images/ingrid/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
