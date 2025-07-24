@@ -21,4 +21,6 @@ urlpatterns = [
     
 
     path('google01b88af1aaba8456.html', TemplateView.as_view(template_name='google01b88af1aaba8456.html', content_type='text/html')),
+    path("sitemap.xml", TemplateView.as_view(template_name="sitemap.xml", content_type="application/xml")),
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 ]
